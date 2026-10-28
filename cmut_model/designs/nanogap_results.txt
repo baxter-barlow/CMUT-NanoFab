@@ -1,0 +1,129 @@
+Al t=1.00 um: D=6.648e-09 N m, m''=2.700e-03 kg/m2
+
+=== 1. Stiction-safe radius vs gap (IPA dry, gamma=0.023 N/m) ===
+g nm | a(R=0.18) um | a(R=0.25) um | Tas membrane drying 1.7x / peel 2.4x um | water-dried a(R=0.25)
+   50 |   8.03 |   8.72 |  10.45 /  14.75 |   6.56
+   75 |   9.84 |  10.68 |  12.80 /  18.06 |   8.03
+  100 |  11.36 |  12.33 |  14.78 /  20.86 |   9.27
+  200 |  16.06 |  17.44 |  20.90 /  29.50 |  13.11
+
+=== 2. Radius ladder: f, V_PI (insulated, 50 nm SiO2, rho_e=0.85) and insulator-free, R ===
+-- gap 50 nm --
+ a um | f_vac MHz | f_water(Lamb) MHz | V_PI ins V | V_PI bare V | C0/cell fF (ins) | R_IPA | status
+  6.0 |   70.87 |   44.94 |    64.3 |    45.7 |   11.5 |  0.06 | safe
+  7.0 |   52.07 |   31.49 |    47.2 |    33.5 |   15.7 |  0.10 | safe
+  8.0 |   39.86 |   23.08 |    36.2 |    25.7 |   20.5 |  0.18 | safe
+  9.0 |   31.50 |   17.53 |    28.6 |    20.3 |   25.9 |  0.28 | likely stuck (wet)
+  9.5 |   28.27 |   15.44 |    25.6 |    18.2 |   28.9 |  0.35 | likely stuck (wet)
+ 10.0 |   25.51 |   13.68 |    23.1 |    16.4 |   32.0 |  0.43 | likely stuck (wet)
+ 11.0 |   21.08 |   10.92 |    19.1 |    13.6 |   38.7 |  0.63 | likely stuck (wet)
+ 12.0 |   17.72 |    8.89 |    16.1 |    11.4 |   46.1 |  0.90 | likely stuck (wet)
+ 14.0 |   13.02 |    6.16 |    11.8 |     8.4 |   62.7 |  1.66 | likely stuck (wet)
+ 16.0 |    9.97 |    4.47 |     9.0 |     6.4 |   81.9 |  2.83 | likely stuck (wet)
+ 18.0 |    7.87 |    3.37 |     7.1 |     5.1 |  103.7 |  4.54 | likely stuck (wet)
+ 20.0 |    6.38 |    2.61 |     5.8 |     4.1 |  128.0 |  6.92 | likely stuck (wet)
+-- gap 75 nm --
+ a um | f_vac MHz | f_water(Lamb) MHz | V_PI ins V | V_PI bare V | C0/cell fF (ins) | R_IPA | status
+  6.0 |   70.87 |   44.94 |   106.3 |    83.9 |    8.2 |  0.02 | safe
+  7.0 |   52.07 |   31.49 |    78.1 |    61.6 |   11.2 |  0.05 | safe
+  8.0 |   39.86 |   23.08 |    59.8 |    47.2 |   14.6 |  0.08 | safe
+  9.0 |   31.50 |   17.53 |    47.2 |    37.3 |   18.5 |  0.13 | safe
+  9.5 |   28.27 |   15.44 |    42.4 |    33.5 |   20.7 |  0.16 | safe
+ 10.0 |   25.51 |   13.68 |    38.3 |    30.2 |   22.9 |  0.19 | marginal
+ 11.0 |   21.08 |   10.92 |    31.6 |    25.0 |   27.7 |  0.28 | likely stuck (wet)
+ 12.0 |   17.72 |    8.89 |    26.6 |    21.0 |   33.0 |  0.40 | likely stuck (wet)
+ 14.0 |   13.02 |    6.16 |    19.5 |    15.4 |   44.9 |  0.74 | likely stuck (wet)
+ 16.0 |    9.97 |    4.47 |    14.9 |    11.8 |   58.6 |  1.26 | likely stuck (wet)
+ 18.0 |    7.87 |    3.37 |    11.8 |     9.3 |   74.1 |  2.02 | likely stuck (wet)
+ 20.0 |    6.38 |    2.61 |     9.6 |     7.5 |   91.5 |  3.08 | likely stuck (wet)
+-- gap 100 nm --
+ a um | f_vac MHz | f_water(Lamb) MHz | V_PI ins V | V_PI bare V | C0/cell fF (ins) | R_IPA | status
+  6.0 |   70.87 |   44.94 |   154.7 |   129.1 |    6.4 |  0.01 | safe
+  7.0 |   52.07 |   31.49 |   113.7 |    94.9 |    8.7 |  0.03 | safe
+  8.0 |   39.86 |   23.08 |    87.0 |    72.6 |   11.4 |  0.04 | safe
+  9.0 |   31.50 |   17.53 |    68.8 |    57.4 |   14.4 |  0.07 | safe
+  9.5 |   28.27 |   15.44 |    61.7 |    51.5 |   16.1 |  0.09 | safe
+ 10.0 |   25.51 |   13.68 |    55.7 |    46.5 |   17.8 |  0.11 | safe
+ 11.0 |   21.08 |   10.92 |    46.0 |    38.4 |   21.6 |  0.16 | safe
+ 12.0 |   17.72 |    8.89 |    38.7 |    32.3 |   25.7 |  0.22 | marginal
+ 14.0 |   13.02 |    6.16 |    28.4 |    23.7 |   34.9 |  0.42 | likely stuck (wet)
+ 16.0 |    9.97 |    4.47 |    21.8 |    18.2 |   45.6 |  0.71 | likely stuck (wet)
+ 18.0 |    7.87 |    3.37 |    17.2 |    14.3 |   57.7 |  1.14 | likely stuck (wet)
+ 20.0 |    6.38 |    2.61 |    13.9 |    11.6 |   71.3 |  1.73 | likely stuck (wet)
+-- gap 200 nm --
+ a um | f_vac MHz | f_water(Lamb) MHz | V_PI ins V | V_PI bare V | C0/cell fF (ins) | R_IPA | status
+  6.0 |   70.87 |   44.94 |   400.9 |   365.2 |    3.4 |  0.00 | safe
+  7.0 |   52.07 |   31.49 |   294.5 |   268.3 |    4.6 |  0.01 | safe
+  8.0 |   39.86 |   23.08 |   225.5 |   205.4 |    6.0 |  0.01 | safe
+  9.0 |   31.50 |   17.53 |   178.2 |   162.3 |    7.6 |  0.02 | safe
+  9.5 |   28.27 |   15.44 |   159.9 |   145.7 |    8.5 |  0.02 | safe
+ 10.0 |   25.51 |   13.68 |   144.3 |   131.5 |    9.4 |  0.03 | safe
+ 11.0 |   21.08 |   10.92 |   119.3 |   108.7 |   11.4 |  0.04 | safe
+ 12.0 |   17.72 |    8.89 |   100.2 |    91.3 |   13.6 |  0.06 | safe
+ 14.0 |   13.02 |    6.16 |    73.6 |    67.1 |   18.5 |  0.10 | safe
+ 16.0 |    9.97 |    4.47 |    56.4 |    51.4 |   24.2 |  0.18 | safe
+ 18.0 |    7.87 |    3.37 |    44.5 |    40.6 |   30.6 |  0.28 | likely stuck (wet)
+ 20.0 |    6.38 |    2.61 |    36.1 |    32.9 |   37.8 |  0.43 | likely stuck (wet)
+
+=== 3. Design point: g=75 nm, a=9.5 um, Al 1 um, 50 nm SiO2, rho_e=0.85 ===
+g_eff=87.8 nm; f_vac=28.27 MHz; f_water(Lamb)=15.44 MHz (beta=2.35); expected immersed centre 15.4-23.2 MHz if sealed
+V_PI single-mode=42.39 V; Galerkin=41.82 V; centre defl at PI (Galerkin)=40.2 nm; touchdown before PI? False
+capillary ratio R(IPA)=0.157; R(water)=0.490
+buckling stress sigma_cr=-1081 MPa
+if vacuum-sealed: 1-atm centre deflection=1.94 nm (2.6% of gap)
+sealed V_PI=41.37 V
+ V= 21.2 V (0.5 V_PI): centre defl=  5.2 nm, n=7.275 uN/V/cell, k_T^2=0.057, k_s/k=0.923 -> f_bias=27.2 MHz (vac), C/cell=21.2 fF, insulator field at centre=0.66 MV/cm
+ V= 33.9 V (0.8 V_PI): centre defl= 15.7 nm, n=13.726 uN/V/cell, k_T^2=0.203, k_s/k=0.737 -> f_bias=24.3 MHz (vac), C/cell=22.5 fF, insulator field at centre=1.21 MV/cm
+ V= 38.2 V (0.9 V_PI): centre defl= 22.3 nm, n=17.334 uN/V/cell, k_T^2=0.327, k_s/k=0.592 -> f_bias=21.7 MHz (vac), C/cell=23.5 fF, insulator field at centre=1.49 MV/cm
+insulator field if plate touches down at V_PI: 8.5 MV/cm (thermal SiO2 measured 8.7 MV/cm; extrinsic 1-2 MV/cm)
+
+=== 4. Self-consistent touchdown-safe insulator under the stiction limit (R=0.18, g=75 nm) ===
+ E_bd=2.0 MV/cm -> no solution (runaway: thicker insulator raises V_PI faster than it adds margin)
+ E_bd=4.0 MV/cm -> V_PI=55.5 V, t_ins=139 nm
+ E_bd=6.0 MV/cm -> V_PI=43.1 V, t_ins=72 nm
+ E_bd=8.7 MV/cm -> V_PI=38.2 V, t_ins=44 nm
+
+=== 5. 8-element 1D array: 100 um pitch (fUS-probe pitch), 2 mm elements ===
+cells/element=3 x 80 = 240; fill factor=0.34; C0/cell=20.7 fF; element C0=4.96 pF; C at pull-in=6.43 pF (+30%)
+crude post-collapse C/cell (contact disk r=0.3a)=49 fF -> element jump 5.4 pF; charge step at V_PI ~228 pC
+ ramp-rate C-V at 0.1 V/s: displacement current 0.50 pA (pre-collapse) -> 1.2 pA (collapsed); leakage must be << this
+ ramp-rate C-V at 1.0 V/s: displacement current 4.96 pA (pre-collapse) -> 11.8 pA (collapsed); leakage must be << this
+pad over 1 um thermal oxide to Si (150 um square): 0.78 pF each (Si floating -> series; upper bound)
+
+=== 6. What the nanogap buys (same a=9.5 um Al cell, 50 nm SiO2) ===
+ g= 1000 nm: g_eff=1012.8 nm, V_PI=  1660.2 V, n@20V=0.0479 uN/V, n@0.8VPI=4.042 uN/V, R_IPA=0.001, p_ceiling(water,FF=0.34)=3860 kPa
+ g=  500 nm: g_eff= 512.8 nm, V_PI=   598.2 V, n@20V=0.1869 uN/V, n@0.8VPI=5.680 uN/V, R_IPA=0.004, p_ceiling(water,FF=0.34)=1955 kPa
+ g=  200 nm: g_eff= 212.8 nm, V_PI=   159.9 V, n@20V=1.0895 uN/V, n@0.8VPI=8.818 uN/V, R_IPA=0.022, p_ceiling(water,FF=0.34)=811 kPa
+ g=  100 nm: g_eff= 112.8 nm, V_PI=    61.7 V, n@20V=3.9757 uN/V, n@0.8VPI=12.111 uN/V, R_IPA=0.088, p_ceiling(water,FF=0.34)=430 kPa
+ g=   75 nm: g_eff=  87.8 nm, V_PI=    42.4 V, n@20V=6.8031 uN/V, n@0.8VPI=13.726 uN/V, R_IPA=0.157, p_ceiling(water,FF=0.34)=335 kPa
+ g=   50 nm: g_eff=  62.8 nm, V_PI=    25.6 V, n@20V=15.5507 uN/V, n@0.8VPI=16.230 uN/V, R_IPA=0.352, p_ceiling(water,FF=0.34)=239 kPa
+
+=== 7. Residual stress sensitivity (design point and 200 nm-gap a=18 um ladder cell) ===
+ a=9.5 um g=75 nm sigma= -200 MPa: f_vac= 25.58 MHz, V_PI=  38.6 V, R_IPA=0.189 (sigma_cr=-1081 MPa)
+ a=9.5 um g=75 nm sigma= -100 MPa: f_vac= 26.96 MHz, V_PI=  40.6 V, R_IPA=0.171 (sigma_cr=-1081 MPa)
+ a=9.5 um g=75 nm sigma=   +0 MPa: f_vac= 28.27 MHz, V_PI=  42.4 V, R_IPA=0.157 (sigma_cr=-1081 MPa)
+ a=9.5 um g=75 nm sigma= +100 MPa: f_vac= 29.51 MHz, V_PI=  44.2 V, R_IPA=0.144 (sigma_cr=-1081 MPa)
+ a=9.5 um g=75 nm sigma= +200 MPa: f_vac= 30.70 MHz, V_PI=  45.8 V, R_IPA=0.134 (sigma_cr=-1081 MPa)
+ a=18.0 um g=200 nm sigma= -200 MPa: f_vac=  4.61 MHz, V_PI=  27.8 V, R_IPA=0.726 (sigma_cr=-301 MPa)
+ a=18.0 um g=200 nm sigma= -100 MPa: f_vac=  6.46 MHz, V_PI=  37.1 V, R_IPA=0.408 (sigma_cr=-301 MPa)
+ a=18.0 um g=200 nm sigma=   +0 MPa: f_vac=  7.87 MHz, V_PI=  44.5 V, R_IPA=0.284 (sigma_cr=-301 MPa)
+ a=18.0 um g=200 nm sigma= +100 MPa: f_vac=  9.05 MHz, V_PI=  50.9 V, R_IPA=0.217 (sigma_cr=-301 MPa)
+ a=18.0 um g=200 nm sigma= +200 MPa: f_vac= 10.08 MHz, V_PI=  56.5 V, R_IPA=0.176 (sigma_cr=-301 MPa)
+
+=== 8. Ladder fit check (200 nm die, insulator-free cells): V_PI^2 * a^4 vs a^2 ===
+ sigma=0 MPa: slope/intercept = 0.00000 per um^2 (expected 12N/(192D) = 0.00000); V_PI(a=8..18)=[205.4, 131.5, 91.3, 67.1, 51.4, 40.6]
+ sigma=50 MPa: slope/intercept = 0.00047 per um^2 (expected 12N/(192D) = 0.00047); V_PI(a=8..18)=[208.5, 134.5, 94.3, 70.1, 54.4, 43.6]
+ sigma=100 MPa: slope/intercept = 0.00094 per um^2 (expected 12N/(192D) = 0.00094); V_PI(a=8..18)=[211.5, 137.5, 97.3, 73.0, 57.2, 46.4]
+
+=== 9. Air in a 75 nm vented gap (rough) ===
+ g=75 nm: Kn=0.91, mu_eff/mu=0.10, squeeze number at 28 MHz=633 (>>1: trapped gas), isothermal gas stiffness/plate k=0.009
+ g=200 nm: Kn=0.34, mu_eff/mu=0.27, squeeze number at 28 MHz=227 (>>1: trapped gas), isothermal gas stiffness/plate k=0.003
+
+=== 10. Small-signal motion in air at 0.8 V_PI (design point) ===
+ quasi-static: 0.419 nm/V average, 1.26 nm/V centre; x Q at resonance; Michelson (633 nm) at quadrature: 1.25% of fringe p-p per V (centre, quasi-static)=== 11. Gap-independent stress readout: bare-cell V_PI ratio between two radii on one die ===
+ g=100 nm sigma=-100 MPa: V(9)=55.2 V, V(12)=30.0 V, ratio=1.838
+ g=100 nm sigma=+0 MPa: V(9)=57.4 V, V(12)=32.3 V, ratio=1.778
+ g=100 nm sigma=+100 MPa: V(9)=59.5 V, V(12)=34.4 V, ratio=1.731
+ g=200 nm sigma=-100 MPa: V(12)=84.9 V, V(16)=44.8 V, ratio=1.897
+ g=200 nm sigma=+0 MPa: V(12)=91.3 V, V(16)=51.4 V, ratio=1.778
+ g=200 nm sigma=+100 MPa: V(12)=97.3 V, V(16)=57.2 V, ratio=1.701

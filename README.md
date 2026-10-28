@@ -28,6 +28,20 @@ The key design choice is the **gap**: a smaller gap lowers the drive voltage but
 | [`proposal/`](proposal/) | Project proposal (LaTeX source + PDF) |
 | `proposal/NanoGap_CMUT_Proposal.*` | Full proposal (two pages) |
 | `proposal/proposal_one_page.*` | One-page version (Gradescope submission format) |
+| [`cmut_model/`](cmut_model/) | Analytic CMUT design-space model (Python) — plate theory, pull-in, stiction, array and beamforming estimates; see [its README](cmut_model/README.md) |
+| [`CMUT_NEUROTECH_RESEARCH.md`](CMUT_NEUROTECH_RESEARCH.md) | Fact-checked literature review and design study behind the proposal |
+| [`REQUIREMENTS.md`](REQUIREMENTS.md) | Course final-project requirements as a structured spec (C1–C5, D1–D6) |
+
+The research doc, `REQUIREMENTS.md`, and `cmut_model/` cross-reference each other by relative path, so they live side by side at the repository root.
+
+## Running the model
+
+Requires `python3` with `numpy` and `scipy`; every script runs from any working directory and writes outputs next to itself. For example:
+
+```bash
+python3 cmut_model/model/design_space.py
+python3 cmut_model/designs/nanogap_design.py
+```
 
 ## Building the PDFs
 

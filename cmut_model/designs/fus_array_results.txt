@@ -1,0 +1,87 @@
+full_probe
+   f_MHz: 15.6
+   lambda_um: 98.72
+   pitch_um: 100
+   pitch_over_lambda: 1.013
+   lambda_half_um: 49.36
+   N: 128
+   aperture_mm: 12.8
+   lateral_res_um_at_5mm: 38.56
+   lateral_res_um_at_10mm: 77.12
+   axial_res_um_FBW100: 49.36
+   axial_res_um_FBW60: 82.26
+   gratinglobe_free_steer_deg_pitch100: 0
+   elements_needed_lambda_half_same_aperture: 260
+slice_oil_10MHz
+   lambda_um: 146.8
+   pitch_over_lambda: 0.6812
+   aperture_mm: 1.6
+   angular_res_deg: 5.257
+   lateral_FWHM_mm_at_5mm: 0.4065
+   unambiguous_window_deg: 47.22
+   far_field_start_mm: 17.44
+slice_oil_12MHz
+   lambda_um: 122.3
+   pitch_over_lambda: 0.8174
+   aperture_mm: 1.6
+   angular_res_deg: 4.381
+   lateral_FWHM_mm_at_5mm: 0.3387
+   unambiguous_window_deg: 37.71
+   far_field_start_mm: 20.93
+slice_oil_15MHz
+   lambda_um: 97.87
+   pitch_over_lambda: 1.022
+   aperture_mm: 1.6
+   angular_res_deg: 3.505
+   lateral_FWHM_mm_at_5mm: 0.271
+   unambiguous_window_deg: 29.3
+   far_field_start_mm: 26.16
+MC_receive_DAS_16el_12MHz_src15deg
+   ideal
+      peak_deg: 15
+      gain_dB: 0
+      PSL_dB: -13.15
+   amp20_phase0.1
+      angle_err_deg_rms: 0.06339
+      gain_dB_mean: -0.0694
+      PSL_dB_median: -12.49
+      PSL_dB_p90: -10.9
+   amp20_phase0.3
+      angle_err_deg_rms: 0.1921
+      gain_dB_mean: -0.3506
+      PSL_dB_median: -11.19
+      PSL_dB_p90: -9.479
+   amp20_phase0.1_dead2
+      angle_err_deg_rms: 0.06998
+      gain_dB_mean: -1.214
+      PSL_dB_median: -11.07
+      PSL_dB_p90: -8.944
+   amp20_phase0.1_dead4
+      angle_err_deg_rms: 0.0758
+      gain_dB_mean: -2.568
+      PSL_dB_median: -9.15
+      PSL_dB_p90: -7.313
+   amp30_phase0.5_dead4
+      angle_err_deg_rms: 0.3871
+      gain_dB_mean: -3.453
+      PSL_dB_median: -6.33
+      PSL_dB_p90: -4.408
+phase_from_freq_spread
+   Q=0.5, df/f=0.05: 0.05
+   Q=0.5, df/f=0.1: 0.1
+   Q=1.0, df/f=0.05: 0.1
+   Q=1.0, df/f=0.1: 0.2
+quasi_static_responsivity_a11
+   20V
+      center_nm_per_Vac: 0.3546
+      static_center_nm: 3.42
+      fringe_fraction_per_Vac_633nm: 0.00352
+   30V
+      center_nm_per_Vac: 0.5907
+      static_center_nm: 8.085
+      fringe_fraction_per_Vac_633nm: 0.005863
+   40V
+      center_nm_per_Vac: 0.955
+      static_center_nm: 15.64
+      fringe_fraction_per_Vac_633nm: 0.00948
+V_PI_a11_vented: 56.5

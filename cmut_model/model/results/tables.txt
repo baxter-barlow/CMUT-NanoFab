@@ -1,0 +1,250 @@
+## Validation
+### V1. Analytical limits of the exact tensioned-plate frequency equation
+| check | model value | reference value |
+|---|---|---|
+| clamped plate lambda^2 (N=0) | 10.2158 | 10.2158 (Leissa NASA SP-160; root of J0 I1 + J1 I0 = 0) |
+| Omega/sqrt(Na^2/D) at Na^2/D=1e+04 | 2.4298 | 2.4048 (membrane, first zero of J0) |
+| Omega/sqrt(Na^2/D) at Na^2/D=1e+06 | 2.4072 | 2.4048 (membrane, first zero of J0) |
+| Omega at N = -0.999 N_cr | 0.328 | -> 0 (buckling at N_cr = 14.68 D/a^2) |
+
+### V2. Residual stress: exact vs Ritz vs root-sum-square approximation (Al, t = 1 um, a = 30 um)
+| sigma [MPa] | N a^2/D | f exact [MHz] | f Ritz (6 terms) [MHz] | f_rss=sqrt(fp^2+fm^2) [MHz] | rss error |
+|---|---|---|---|---|---|
+| -98 | -13.2 | 0.909 | 0.909 | nan | n/a (compression) |
+| -50 | -6.8 | 2.095 | 2.095 | nan | n/a (compression) |
+| 0 | 0.0 | 2.835 | 2.835 | 2.835 | -0.0% |
+| 50 | 6.8 | 3.408 | 3.408 | 3.324 | -2.5% |
+| 100 | 13.5 | 3.891 | 3.891 | 3.750 | -3.6% |
+| 200 | 27.1 | 4.700 | 4.700 | 4.482 | -4.6% |
+| 500 | 67.7 | 6.509 | 6.509 | 6.179 | -5.1% |
+| 1000 | 135.4 | 8.675 | 8.675 | 8.266 | -4.7% |
+
+### V3. Pull-in: single-mode and piston shortcuts vs 6-term Galerkin
+| case | V_PI Galerkin 6-term [V] | single-mode (Wygant) | piston, k=64piD/a^2 (uniform-load) | piston, k=192piD/a^2 (avg-deflection) |
+|---|---|---|---|---|
+| Al 1um a30um g200nm, vented | 14.35 | 14.53 (+1.2%) | 11.86 (-17%) | 20.54 (+43%) |
+| Al 1um a30um g200nm, sigma=+100 MPa | 19.76 | 19.74 (-0.1%) | 16.11 (-18%) | 27.91 (+41%) |
+| Al 1um a15um g100nm, sealed 1 atm (piston formulas ignore the 1-atm bias) | 17.61 | 17.89 (+1.6%) | 16.77 (-5%) | 29.05 (+65%) |
+| Al 1um a25um g100nm, sealed 1 atm (piston formulas ignore the 1-atm bias) | 0.42 | 0.46 (+9.8%) | 6.04 (+1347%) | 10.46 (+2406%) |
+| Al 2um a60um g1um, vented | 113.46 | 114.87 (+1.2%) | 93.75 (-17%) | 162.37 (+43%) |
+| single-mode prefactor V_PI^2 eps0 A/(k g^3) | - | 0.1483 (Wygant 2019: 0.148), wn_PI = 0.154 (0.154) | 8/27 = 0.296 | 8/27 = 0.296 |
+
+### V4. Published devices (no fitting except SU-8 modulus choice)
+| device | vacuum/air resonance | atmospheric deflection | fluid-loaded (Lamb) | pull-in |
+|---|---|---|---|---|
+| Gerardo 2018 polyCMUT, SU-8 E=4.0 GPa | f_air 2.52 MHz (meas. 2.83) | w_atm 56 nm (meas. 82) | f_oil(Lamb) 1.35 MHz (meas. centre 1.525) | V_PI 99 V (meas. 65, sealed, 46% electrode) |
+| Gerardo 2018 polyCMUT, SU-8 E=2.0 GPa | f_air 2.27 MHz (meas. 2.83) | w_atm 68 nm (meas. 82) | f_oil(Lamb) 1.21 MHz (meas. centre 1.525) | V_PI 87 V (meas. 65, sealed, 46% electrode) |
+| Merbeler 2022 poly-Si (no piston), insulator eps_r=4 | f_air 6.59 MHz (meas. 6.43) | w_atm 52 nm of 120 nm gap | f_oil(Lamb) 2.24 MHz (meas. peak 3.35) | V_PI sealed 7.8 V / vented 13.9 V (meas. 7.4) |
+| Merbeler 2022 poly-Si (no piston), insulator eps_r=7 | f_air 6.59 MHz (meas. 6.43) | w_atm 52 nm of 120 nm gap | f_oil(Lamb) 2.24 MHz (meas. peak 3.35) | V_PI sealed 7.4 V / vented 13.5 V (meas. 7.4) |
+
+## Table 1. Immersed (water) designs: largest gap with V_PI <= 150 V; sealed-cell constraints; thickness maximises stroke-limited output
+(k_T^2 at 0.8 V_PI = 0.16 for every design: for the clamped-plate shape it depends only on V/V_PI)
+| f target MHz | stack | t_struct (total) um | a um | f_vac MHz | f_water MHz | Lamb beta | g_air nm (max @V_PI<=150 V) | t_ins nm | V_PI vented V | V_PI sealed V | w_atm,centre/g | cells per lambda/2 elem | FF | p_ceil kPa (FF of lambda/2 element) | V_PI if g=100 nm | V_PI if g=50 nm | sigma_cr MPa | capillary ratio R | flags |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 0.5 | Al | 2.50 (2.50) | 67.8 | 1.39 | 0.50 | 6.7 | 1030 | 749 | 150 | 99 | 0.31 | 100 | 0.64 | 262 | 4.4 | 1.7 | -133 | 0.14 | t > course-practical |
+| 0.5 | Cr | 0.50 (0.50) | 32.6 | 1.33 | 0.50 | 6.1 | 1334 | 749 | 150 | 71 | 0.49 | 400 | 0.59 | 309 | 3.0 | 1.2 | -75 | 0.17 |  |
+| 0.5 | Au/SU-8 | 3.00 (3.05) | 51.7 | 1.47 | 0.50 | 7.6 | 1150 | 749 | 150 | 89 | 0.38 | 169 | 0.63 | 286 | 3.7 | 1.4 | -32 | 0.15 |  |
+| 0.5 | Al/ParyC | 3.00 (3.10) | 48.0 | 1.48 | 0.50 | 7.8 | 1175 | 749 | 150 | 86 | 0.39 | 196 | 0.63 | 291 | 3.6 | 1.4 | -37 | 0.15 |  |
+| 0.5 | Cr/SiN | 2.50 (2.55) | 79.6 | 1.46 | 0.50 | 7.5 | 977 | 749 | 150 | 103 | 0.28 | 81 | 0.72 | 279 | 4.7 | 1.8 | -208 | 0.13 | t > course-practical |
+| 0.5 | Cr/Al2O3 | 1.50 (1.55) | 57.1 | 1.49 | 0.50 | 7.9 | 1104 | 749 | 150 | 93 | 0.35 | 144 | 0.65 | 285 | 4.0 | 1.5 | -126 | 0.14 | t > course-practical |
+| 1.0 | Al | 1.00 (1.00) | 29.7 | 2.89 | 1.00 | 7.4 | 842 | 750 | 150 | 113 | 0.22 | 121 | 0.60 | 406 | 5.7 | 2.2 | -111 | 0.12 |  |
+| 1.0 | Cr | 0.20 (0.20) | 14.3 | 2.77 | 1.00 | 6.7 | 1095 | 749 | 150 | 93 | 0.35 | 441 | 0.50 | 436 | 4.0 | 1.5 | -63 | 0.14 |  |
+| 1.0 | Au/SU-8 | 0.60 (0.65) | 17.3 | 2.81 | 1.00 | 6.9 | 1031 | 749 | 150 | 99 | 0.31 | 324 | 0.54 | 444 | 4.4 | 1.7 | -19 | 0.14 |  |
+| 1.0 | Al/ParyC | 1.50 (1.60) | 25.2 | 2.94 | 1.00 | 7.7 | 896 | 750 | 150 | 109 | 0.24 | 169 | 0.60 | 432 | 5.3 | 2.0 | -42 | 0.12 |  |
+| 1.0 | Cr/SiN | 1.00 (1.05) | 35.8 | 2.97 | 1.00 | 7.8 | 788 | 750 | 150 | 117 | 0.20 | 81 | 0.58 | 371 | 6.3 | 2.4 | -182 | 0.11 |  |
+| 1.0 | Cr/Al2O3 | 0.80 (0.85) | 30.5 | 2.90 | 1.00 | 7.4 | 834 | 750 | 150 | 114 | 0.22 | 121 | 0.63 | 423 | 5.8 | 2.2 | -140 | 0.12 |  |
+| 2.0 | Al | 0.80 (0.80) | 19.6 | 5.32 | 2.00 | 6.1 | 578 | 749 | 150 | 129 | 0.12 | 64 | 0.55 | 536 | 9.4 | 3.6 | -163 | 0.09 |  |
+| 2.0 | Cr | 0.30 (0.30) | 13.6 | 4.57 | 2.00 | 4.2 | 649 | 749 | 150 | 126 | 0.14 | 121 | 0.50 | 543 | 8.1 | 3.1 | -155 | 0.10 |  |
+| 2.0 | Au/SU-8 | 0.60 (0.65) | 12.4 | 4.87 | 2.00 | 4.9 | 684 | 749 | 150 | 123 | 0.16 | 144 | 0.49 | 558 | 7.6 | 2.9 | -37 | 0.10 |  |
+| 2.0 | Al/ParyC | 0.80 (0.90) | 13.7 | 5.67 | 2.00 | 7.0 | 668 | 749 | 150 | 124 | 0.15 | 121 | 0.51 | 561 | 7.8 | 3.0 | -48 | 0.10 |  |
+| 2.0 | Cr/SiN | 0.40 (0.45) | 16.5 | 5.89 | 2.00 | 7.7 | 624 | 749 | 150 | 127 | 0.13 | 81 | 0.49 | 516 | 8.5 | 3.3 | -168 | 0.10 |  |
+| 2.0 | Cr/Al2O3 | 0.30 (0.35) | 13.9 | 5.78 | 2.00 | 7.4 | 666 | 749 | 150 | 125 | 0.15 | 121 | 0.52 | 574 | 7.8 | 3.0 | -128 | 0.10 |  |
+| 5.0 | Al | 0.60 (0.60) | 11.3 | 11.92 | 5.00 | 4.7 | 338 | 749 | 150 | 140 | 0.05 | 25 | 0.45 | 704 | 20.0 | 7.1 | -274 | 0.07 |  |
+| 5.0 | Cr | 0.20 (0.20) | 7.3 | 10.51 | 5.00 | 3.4 | 395 | 749 | 150 | 138 | 0.07 | 49 | 0.37 | 655 | 16.0 | 5.9 | -238 | 0.08 |  |
+| 5.0 | Au/SU-8 | 2.00 (2.05) | 15.1 | 10.01 | 5.00 | 3.0 | 287 | 749 | 150 | 142 | 0.04 | 16 | 0.51 | 702 | 25.1 | 8.5 | -190 | 0.07 |  |
+| 5.0 | Al/ParyC | 2.00 (2.10) | 15.0 | 10.64 | 5.00 | 3.5 | 292 | 749 | 150 | 142 | 0.04 | 16 | 0.50 | 708 | 24.6 | 8.4 | -193 | 0.07 |  |
+| 5.0 | Cr/SiN | 0.40 (0.45) | 11.3 | 12.52 | 5.00 | 5.3 | 341 | 749 | 150 | 140 | 0.05 | 25 | 0.45 | 708 | 19.7 | 7.0 | -357 | 0.07 |  |
+| 5.0 | Cr/Al2O3 | 0.40 (0.45) | 11.0 | 11.93 | 5.00 | 4.7 | 343 | 749 | 150 | 140 | 0.05 | 25 | 0.42 | 665 | 19.6 | 6.9 | -329 | 0.07 |  |
+| 10.0 | Al | 0.60 (0.60) | 8.5 | 21.23 | 10.00 | 3.5 | 200 | 749 | 150 | 144 | 0.03 | 9 | 0.36 | 774 | 42.5 | 13.3 | -487 | 0.07 |  |
+| 10.0 | Cr | 0.40 (0.40) | 8.2 | 17.02 | 10.00 | 1.9 | 187 | 748 | 150 | 144 | 0.03 | 9 | 0.33 | 683 | 46.8 | 14.5 | -770 | 0.07 |  |
+| 10.0 | Au/SU-8 | 1.25 (1.30) | 8.8 | 18.41 | 10.00 | 2.4 | 188 | 748 | 150 | 144 | 0.03 | 9 | 0.39 | 789 | 46.6 | 14.4 | -257 | 0.07 |  |
+| 10.0 | Al/ParyC | 3.00 (3.10) | 13.8 | 17.96 | 10.00 | 2.2 | 146 | 744 | 149 | 145 | 0.02 | 4 | 0.42 | 737 | 68.8 | 20.0 | -454 | 0.07 |  |
+| 10.0 | Cr/SiN | 0.40 (0.45) | 8.5 | 22.25 | 10.00 | 3.9 | 202 | 749 | 150 | 144 | 0.03 | 9 | 0.36 | 781 | 41.7 | 13.1 | -635 | 0.07 |  |
+| 10.0 | Cr/Al2O3 | 0.40 (0.45) | 8.2 | 21.26 | 10.00 | 3.5 | 203 | 749 | 150 | 144 | 0.03 | 9 | 0.34 | 731 | 41.4 | 13.0 | -586 | 0.07 |  |
+
+## Table 2. Air designs (vented bench devices; thickest course-practical plate, largest gap with V_PI <= 150 V)
+| f target MHz | stack | t_struct (total) um | a um | f_vac MHz | f_air MHz | Lamb beta | g_air nm (max @V_PI<=150 V) | t_ins nm | V_PI vented V | V_PI sealed V | w_atm,centre/g | cells per lambda/2 elem | FF | p_ceil Pa (dense-packed FF) | V_PI if g=100 nm | V_PI if g=50 nm | sigma_cr MPa | capillary ratio R | flags |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 0.5 | Al | 1.00 (1.00) | 71.1 | 0.51 | 0.50 | 0.0 | 2000 | 426 | 85 | collapsed | 3.04 | 4 | 0.54 | 148 | 1.0 | 0.4 | -19 | 0.69 | must be vented (1 atm collapses a sealed cell); wet-release stiction risk |
+| 0.5 | Cr | 0.50 (0.50) | 53.0 | 0.50 | 0.50 | 0.0 | 2000 | 492 | 98 | collapsed | 2.30 | 9 | 0.68 | 145 | 1.2 | 0.4 | -28 | 0.52 | must be vented (1 atm collapses a sealed cell); wet-release stiction risk |
+| 0.5 | Au/SU-8 | 2.00 (2.05) | 93.8 | 0.51 | 0.50 | 0.0 | 2000 | 473 | 95 | collapsed | 2.48 | 1 | 0.24 | 152 | 1.1 | 0.4 | -5 | 0.56 | must be vented (1 atm collapses a sealed cell); wet-release stiction risk |
+| 0.5 | Al/ParyC | 4.00 (4.10) | 92.9 | 0.50 | 0.50 | 0.0 | 2000 | 612 | 122 | collapsed | 1.52 | 1 | 0.23 | 153 | 1.4 | 0.5 | -16 | 0.35 | must be vented (1 atm collapses a sealed cell); wet-release stiction risk |
+| 0.5 | Cr/SiN | 1.00 (1.05) | 86.6 | 0.51 | 0.50 | 0.0 | 2000 | 455 | 91 | collapsed | 2.68 | 1 | 0.20 | 151 | 1.1 | 0.4 | -31 | 0.61 | must be vented (1 atm collapses a sealed cell); wet-release stiction risk |
+| 0.5 | Cr/Al2O3 | 1.00 (1.05) | 80.9 | 0.50 | 0.50 | 0.0 | 2000 | 477 | 95 | collapsed | 2.44 | 4 | 0.70 | 150 | 1.1 | 0.4 | -30 | 0.55 | must be vented (1 atm collapses a sealed cell); wet-release stiction risk |
+| 1.0 | Al | 1.00 (1.00) | 50.3 | 1.01 | 1.00 | 0.0 | 1796 | 750 | 150 | 20 | 0.85 | 1 | 0.27 | 264 | 2.0 | 0.8 | -39 | 0.21 |  |
+| 1.0 | Cr | 0.50 (0.50) | 37.5 | 1.00 | 1.00 | 0.0 | 1628 | 750 | 150 | 39 | 0.71 | 4 | 0.60 | 231 | 2.3 | 0.9 | -57 | 0.20 |  |
+| 1.0 | Au/SU-8 | 8.00 (8.05) | 95.2 | 1.00 | 1.00 | 0.0 | 1117 | 749 | 150 | 91 | 0.36 | 0 | 0.00 | 178 | 3.9 | 1.5 | -50 | 0.15 |  |
+| 1.0 | Al/ParyC | 5.00 (5.10) | 72.2 | 1.00 | 1.00 | 0.0 | 1304 | 749 | 150 | 74 | 0.47 | 1 | 0.56 | 202 | 3.1 | 1.2 | -39 | 0.16 |  |
+| 1.0 | Cr/SiN | 1.00 (1.05) | 61.4 | 1.01 | 1.00 | 0.0 | 1718 | 750 | 150 | 29 | 0.78 | 1 | 0.40 | 258 | 2.1 | 0.8 | -62 | 0.21 |  |
+| 1.0 | Cr/Al2O3 | 1.00 (1.05) | 57.3 | 1.01 | 1.00 | 0.0 | 1664 | 750 | 150 | 35 | 0.74 | 1 | 0.35 | 249 | 2.2 | 0.9 | -59 | 0.20 |  |
+| 2.0 | Al | 1.00 (1.00) | 35.6 | 2.01 | 2.00 | 0.0 | 1098 | 749 | 150 | 93 | 0.35 | 1 | 0.54 | 318 | 4.0 | 1.5 | -77 | 0.14 |  |
+| 2.0 | Cr | 0.50 (0.50) | 26.6 | 2.01 | 2.00 | 0.0 | 992 | 749 | 150 | 102 | 0.29 | 1 | 0.30 | 275 | 4.6 | 1.8 | -113 | 0.13 |  |
+| 2.0 | Au/SU-8 | 10.00 (10.05) | 71.7 | 2.00 | 2.00 | 0.0 | 618 | 749 | 150 | 127 | 0.13 | 0 | 0.00 | 206 | 8.7 | 3.3 | -130 | 0.10 |  |
+| 2.0 | Al/ParyC | 5.00 (5.10) | 51.1 | 2.01 | 2.00 | 0.0 | 788 | 750 | 150 | 117 | 0.20 | 0 | 0.00 | 247 | 6.3 | 2.4 | -77 | 0.11 |  |
+| 2.0 | Cr/SiN | 1.00 (1.05) | 43.4 | 2.01 | 2.00 | 0.0 | 1050 | 749 | 150 | 97 | 0.32 | 0 | 0.00 | 314 | 4.2 | 1.6 | -124 | 0.14 |  |
+| 2.0 | Cr/Al2O3 | 1.00 (1.05) | 40.6 | 2.01 | 2.00 | 0.0 | 1015 | 749 | 150 | 100 | 0.30 | 0 | 0.00 | 301 | 4.4 | 1.7 | -118 | 0.14 |  |
+| 5.0 | Al | 1.00 (1.00) | 22.6 | 5.02 | 5.00 | 0.0 | 554 | 749 | 150 | 131 | 0.11 | 0 | 0.00 | 396 | 10.0 | 3.8 | -192 | 0.09 |  |
+| 5.0 | Cr | 0.50 (0.50) | 16.8 | 5.01 | 5.00 | 0.0 | 496 | 750 | 150 | 134 | 0.09 | 0 | 0.00 | 333 | 11.6 | 4.4 | -283 | 0.09 |  |
+| 5.0 | Au/SU-8 | 10.00 (10.05) | 44.6 | 5.01 | 5.00 | 0.0 | 292 | 749 | 150 | 142 | 0.04 | 0 | 0.00 | 266 | 24.5 | 8.3 | -338 | 0.07 |  |
+| 5.0 | Al/ParyC | 5.00 (5.10) | 32.3 | 5.01 | 5.00 | 0.0 | 385 | 749 | 150 | 138 | 0.06 | 0 | 0.00 | 314 | 16.6 | 6.0 | -192 | 0.08 |  |
+| 5.0 | Cr/SiN | 1.00 (1.05) | 27.5 | 5.02 | 5.00 | 0.0 | 528 | 749 | 150 | 132 | 0.10 | 0 | 0.00 | 396 | 10.7 | 4.1 | -308 | 0.09 |  |
+| 5.0 | Cr/Al2O3 | 1.00 (1.05) | 25.7 | 5.02 | 5.00 | 0.0 | 509 | 750 | 150 | 133 | 0.10 | 0 | 0.00 | 379 | 11.2 | 4.3 | -295 | 0.09 |  |
+| 10.0 | Al | 1.00 (1.00) | 16.0 | 10.02 | 10.00 | 0.0 | 315 | 749 | 150 | 141 | 0.05 | 0 | 0.00 | 454 | 22.1 | 7.7 | -383 | 0.07 |  |
+| 10.0 | Cr | 0.50 (0.50) | 11.9 | 10.01 | 10.00 | 0.0 | 278 | 749 | 150 | 142 | 0.04 | 0 | 0.00 | 371 | 26.4 | 8.8 | -566 | 0.07 |  |
+| 10.0 | Au/SU-8 | 10.00 (10.05) | 31.3 | 10.01 | 10.00 | 0.0 | 149 | 745 | 149 | 145 | 0.02 | 0 | 0.00 | 316 | 66.6 | 19.4 | -683 | 0.07 |  |
+| 10.0 | Al/ParyC | 5.00 (5.10) | 22.9 | 10.01 | 10.00 | 0.0 | 208 | 749 | 150 | 144 | 0.03 | 0 | 0.00 | 369 | 40.1 | 12.6 | -384 | 0.07 |  |
+| 10.0 | Cr/SiN | 1.00 (1.05) | 19.5 | 10.03 | 10.00 | 0.0 | 298 | 749 | 150 | 141 | 0.05 | 0 | 0.00 | 461 | 23.9 | 8.2 | -616 | 0.07 |  |
+| 10.0 | Cr/Al2O3 | 1.00 (1.05) | 18.2 | 10.02 | 10.00 | 0.0 | 286 | 749 | 150 | 142 | 0.04 | 0 | 0.00 | 439 | 25.3 | 8.5 | -589 | 0.07 |  |
+
+## Table 3. lambda/2 pitch in water vs cell diameter: cells per lambda/2 x lambda/2 element (fill factor)
+| f MHz | lambda water um | lambda/2 water um | lambda/2 air um | 2a=10 um | 2a=20 um | 2a=30 um | 2a=40 um | 2a=60 um | 2a=80 um | 2a=120 um | 2a=160 um | 2a=200 um |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 0.5 | 3000 | 1500 | 343.0 | 8649 (0.30) | 3249 (0.45) | 1681 (0.53) | 1024 (0.57) | 484 (0.61) | 289 (0.65) | 121 (0.61) | 81 (0.72) | 49 (0.68) |
+| 1.0 | 1500 | 750 | 171.5 | 2116 (0.30) | 784 (0.44) | 400 (0.50) | 256 (0.57) | 121 (0.61) | 64 (0.57) | 25 (0.50) | 16 (0.57) | 9 (0.50) |
+| 2.0 | 750 | 375 | 85.8 | 529 (0.30) | 196 (0.44) | 100 (0.50) | 64 (0.57) | 25 (0.50) | 16 (0.57) | 4 (0.32) | 4 (0.57) | 1 (0.22) |
+| 5.0 | 300 | 150 | 34.3 | 81 (0.28) | 25 (0.35) | 16 (0.50) | 9 (0.50) | 4 (0.50) | 1 (0.22) | 1 (0.50) | 0 (cell > pitch) | 0 (cell > pitch) |
+| 10.0 | 150 | 75 | 17.2 | 16 (0.22) | 4 (0.22) | 1 (0.13) | 1 (0.22) | 1 (0.50) | 0 (cell > pitch) | 0 (cell > pitch) | 0 (cell > pitch) | 0 (cell > pitch) |
+
+## Table 4. Nanogap scaling on fixed reference cells
+Fixed 50 nm Al2O3 insulator (g_eff = g + 6 nm) so that only the gap changes; 't_ins for contact' = V_PI / 2 MV/cm is the insulator needed if the plate may touch down. V_op = 0.8 V_PI unless noted.
+
+**Reference cell: Au/SU-8 t = 0.60 um, a = 17.3 um, f_water(Lamb) = 1.00 MHz, 324 cells per lambda/2 element (FF 0.54)**
+
+| g_air nm | g_eff nm | V_PI vented V | V_PI sealed V | w_atm,centre/g | t_ins for contact nm | C0/cell fF | E_gap at V_op V/um | n at V_op uN/V | k_T^2 | S_i/element nA/kPa (in-band, TIA) | S_v/element uV/Pa (Cp=10 pF) | S_oc static/cell uV/Pa (no Cp) | n at fixed 10 V uN/V | p_ceil kPa | capillary ratio R |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1000 | 1006 | 126.9 | 83.9 | 0.32 | 635 | 8.9 | 123 | 1.061 | 0.16 | 458 | 5.67 | 144.0 | 0.083 | 397 | 0.15 |
+| 500 | 506 | 45.3 | 15.5 | 0.64 | 226 | 17.6 | 87 | 1.496 | 0.16 | 646 | 6.55 | 102.1 | 0.330 | 200 | 0.58 |
+| 300 | 306 | 21.3 | collapsed | 1.07 | 107 | 29.1 | 68 | 1.924 | 0.16 | 831 | 6.81 | 79.4 | 0.949 | 121 | 1.62 |
+| 200 | 206 | 11.8 | collapsed | 1.61 | 59 | 43.2 | 56 | 2.344 | 0.16 | 1013 | 6.72 | 65.2 | 2.611 | 81 | 3.65 |
+| 100 | 106 | 4.4 | collapsed | 3.22 | 50 | 83.8 | 40 | 3.266 | 0.16 | 1411 | 6.04 | 46.8 | - | 42 | 14.62 |
+| 75 | 81 | 2.9 | collapsed | 4.29 | 50 | 109.6 | 35 | 3.734 | 0.16 | 1613 | 5.64 | 40.9 | - | 32 | 25.98 |
+| 50 | 56 | 1.7 | collapsed | 6.44 | 50 | 158.4 | 29 | 4.488 | 0.16 | 1939 | 5.03 | 34.0 | - | 22 | 58.46 |
+
+**Reference cell: Cr/SiN t = 0.40 um, a = 16.5 um, f_water(Lamb) = 2.00 MHz, 81 cells per lambda/2 element (FF 0.49)**
+
+| g_air nm | g_eff nm | V_PI vented V | V_PI sealed V | w_atm,centre/g | t_ins for contact nm | C0/cell fF | E_gap at V_op V/um | n at V_op uN/V | k_T^2 | S_i/element nA/kPa (in-band, TIA) | S_v/element uV/Pa (Cp=10 pF) | S_oc static/cell uV/Pa (no Cp) | n at fixed 10 V uN/V | p_ceil kPa | capillary ratio R |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1000 | 1006 | 248.8 | 226.5 | 0.08 | 1244 | 8.1 | 241 | 1.891 | 0.16 | 204 | 1.53 | 73.5 | 0.075 | 723 | 0.04 |
+| 500 | 506 | 88.8 | 73.1 | 0.17 | 444 | 16.0 | 171 | 2.667 | 0.16 | 288 | 2.03 | 52.1 | 0.297 | 364 | 0.15 |
+| 300 | 306 | 41.8 | 29.6 | 0.28 | 209 | 26.5 | 133 | 3.429 | 0.16 | 370 | 2.43 | 40.5 | 0.822 | 220 | 0.42 |
+| 200 | 206 | 23.1 | 13.2 | 0.42 | 115 | 39.3 | 109 | 4.178 | 0.16 | 451 | 2.72 | 33.3 | 1.883 | 148 | 0.95 |
+| 100 | 106 | 8.5 | 1.7 | 0.84 | 50 | 76.2 | 78 | 5.821 | 0.16 | 629 | 3.09 | 23.9 | - | 76 | 3.80 |
+| 75 | 81 | 5.7 | collapsed | 1.12 | 50 | 99.7 | 69 | 6.656 | 0.16 | 719 | 3.16 | 20.9 | - | 58 | 6.76 |
+| 50 | 56 | 3.3 | collapsed | 1.68 | 50 | 144.0 | 57 | 8.000 | 0.16 | 864 | 3.17 | 17.4 | - | 40 | 15.22 |
+
+**Reference cell: Al t = 0.60 um, a = 11.3 um, f_water(Lamb) = 5.00 MHz, 25 cells per lambda/2 element (FF 0.45)**
+
+| g_air nm | g_eff nm | V_PI vented V | V_PI sealed V | w_atm,centre/g | t_ins for contact nm | C0/cell fF | E_gap at V_op V/um | n at V_op uN/V | k_T^2 | S_i/element nA/kPa (in-band, TIA) | S_v/element uV/Pa (Cp=10 pF) | S_oc static/cell uV/Pa (no Cp) | n at fixed 10 V uN/V | p_ceil kPa | capillary ratio R |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1000 | 1006 | 533.9 | 523.5 | 0.02 | 2670 | 3.8 | 518 | 1.912 | 0.16 | 64 | 0.20 | 34.2 | 0.035 | 1642 | 0.01 |
+| 500 | 506 | 190.5 | 183.2 | 0.04 | 953 | 7.5 | 367 | 2.695 | 0.16 | 90 | 0.28 | 24.3 | 0.140 | 826 | 0.03 |
+| 300 | 306 | 89.6 | 83.9 | 0.06 | 448 | 12.5 | 286 | 3.465 | 0.16 | 116 | 0.36 | 18.9 | 0.382 | 500 | 0.09 |
+| 200 | 206 | 49.5 | 44.9 | 0.09 | 248 | 18.5 | 235 | 4.222 | 0.16 | 141 | 0.43 | 15.5 | 0.849 | 336 | 0.21 |
+| 100 | 106 | 18.3 | 15.0 | 0.18 | 92 | 35.9 | 168 | 5.883 | 0.16 | 196 | 0.57 | 11.1 | 3.464 | 173 | 0.83 |
+| 75 | 81 | 12.3 | 9.3 | 0.24 | 61 | 47.0 | 147 | 6.727 | 0.16 | 224 | 0.64 | 9.7 | 6.967 | 133 | 1.47 |
+| 50 | 56 | 7.1 | 4.6 | 0.36 | 50 | 67.8 | 122 | 8.085 | 0.16 | 270 | 0.73 | 8.1 | - | 92 | 3.30 |
+
+## Table 4b. What frequencies can a sub-100 nm gap reach? (lowest immersed f with sealing / stiction constraints)
+| g_air nm | stack | A: lowest f_water MHz (sealed + R<=0.25) | A: t um / a um | A: V_PI vented / sealed V | A: cells per lambda/2 | B: lowest f_water MHz (sealed, stiction ignored) | B: t um / a um | B: V_PI vented / sealed V |
+|---|---|---|---|---|---|---|---|---|
+| 50 | Al | 18.88 | 1.00 / 8.7 | 39.2 / 37.6 | 1 | 3.37 | 1.00 / 18.0 | 6.0 / 3.2 |
+| 50 | Cr | 19.18 | 0.50 / 7.0 | 39.2 / 37.6 | 1 | 3.56 | 0.50 / 14.4 | 6.0 / 3.2 |
+| 50 | Au/SU-8 | 10.12 | 10.00 / 25.2 | 39.2 / 37.6 | 1 | 1.87 | 10.00 / 52.7 | 6.0 / 3.2 |
+| 50 | Al/ParyC | 13.29 | 5.00 / 15.7 | 39.2 / 37.6 | 1 | 2.43 | 5.00 / 32.4 | 6.0 / 3.2 |
+| 50 | Cr/SiN | 17.10 | 1.00 / 11.0 | 39.2 / 37.6 | 1 | 3.03 | 1.00 / 22.6 | 6.0 / 3.2 |
+| 50 | Cr/Al2O3 | 17.12 | 1.00 / 10.5 | 39.2 / 37.6 | 1 | 3.06 | 1.00 / 21.6 | 6.0 / 3.2 |
+| 75 | Al | 11.72 | 1.00 / 10.7 | 41.0 / 38.8 | 4 | 2.64 | 1.00 / 19.9 | 8.5 / 4.4 |
+| 75 | Cr | 12.05 | 0.50 / 8.5 | 41.0 / 38.8 | 4 | 2.80 | 0.50 / 15.9 | 8.5 / 4.4 |
+| 75 | Au/SU-8 | 6.35 | 10.00 / 31.0 | 40.9 / 38.8 | 1 | 1.47 | 10.00 / 58.5 | 8.5 / 4.4 |
+| 75 | Al/ParyC | 8.31 | 5.00 / 19.2 | 40.9 / 38.8 | 1 | 1.91 | 5.00 / 35.9 | 8.5 / 4.4 |
+| 75 | Cr/SiN | 10.59 | 1.00 / 13.4 | 41.0 / 38.8 | 4 | 2.37 | 1.00 / 25.1 | 8.5 / 4.4 |
+| 75 | Cr/Al2O3 | 10.64 | 1.00 / 12.8 | 41.0 / 38.8 | 4 | 2.40 | 1.00 / 23.9 | 8.5 / 4.4 |
+| 100 | Al | 8.33 | 1.00 / 12.3 | 43.7 / 40.7 | 4 | 2.22 | 1.00 / 21.4 | 11.2 / 5.6 |
+| 100 | Cr | 8.63 | 0.50 / 9.9 | 43.7 / 40.7 | 9 | 2.36 | 0.50 / 17.1 | 11.2 / 5.6 |
+| 100 | Au/SU-8 | 4.55 | 10.00 / 35.8 | 43.7 / 40.7 | 4 | 1.24 | 10.00 / 63.1 | 11.2 / 5.6 |
+| 100 | Al/ParyC | 5.94 | 5.00 / 22.2 | 43.7 / 40.7 | 4 | 1.61 | 5.00 / 38.5 | 11.2 / 5.6 |
+| 100 | Cr/SiN | 7.52 | 1.00 / 15.5 | 43.7 / 40.7 | 4 | 1.99 | 1.00 / 26.9 | 11.2 / 5.6 |
+| 100 | Cr/Al2O3 | 7.57 | 1.00 / 14.8 | 43.7 / 40.7 | 4 | 2.02 | 1.00 / 25.7 | 11.2 / 5.6 |
+
+## Table 5. Residual stress (uniform biaxial stress through the stack)
+| design | sigma MPa | N a^2/D | f_vac exact MHz | f_rss MHz | f_water MHz | V_PI (Galerkin, vented) V | V_PI change vs sigma=0 |
+|---|---|---|---|---|---|---|---|
+| Al t=1.00 um a=29.7 um g=842 nm | -100 (0.9 sigma_cr) | -13.2 | 0.93 | - | 0.32 | 47.3 | -68% |
+| Al t=1.00 um a=29.7 um g=842 nm | -100 | -13.3 | 0.91 | - | 0.31 | 46.3 | -69% |
+| Al t=1.00 um a=29.7 um g=842 nm | -50 | -6.6 | 2.15 | - | 0.74 | 110.1 | -26% |
+| Al t=1.00 um a=29.7 um g=842 nm | 0 | 0.0 | 2.89 | 2.89 | 1.00 | 148.1 | +0% |
+| Al t=1.00 um a=29.7 um g=842 nm | 50 | 6.6 | 3.47 | 3.38 | 1.20 | 177.8 | +20% |
+| Al t=1.00 um a=29.7 um g=842 nm | 100 | 13.3 | 3.95 | 3.81 | 1.37 | 203.0 | +37% |
+| Al t=1.00 um a=29.7 um g=842 nm | 200 | 26.5 | 4.76 | 4.54 | 1.65 | 245.2 | +66% |
+| Al t=1.00 um a=29.7 um g=842 nm | 500 | 66.4 | 6.59 | 6.25 | 2.28 | 340.0 | +130% |
+| Au/SU-8 t=0.60 um a=17.3 um g=1031 nm | -17 (0.9 sigma_cr) | -13.2 | 0.67 | - | 0.24 | 35.6 | -68% |
+| Au/SU-8 t=0.60 um a=17.3 um g=1031 nm | -100 | - | buckled (sigma_cr = -19 MPa) | - | - | - | - |
+| Au/SU-8 t=0.60 um a=17.3 um g=1031 nm | -50 | - | buckled (sigma_cr = -19 MPa) | - | - | - | - |
+| Au/SU-8 t=0.60 um a=17.3 um g=1031 nm | 0 | 0.0 | 2.10 | 2.10 | 0.75 | 111.6 | +0% |
+| Au/SU-8 t=0.60 um a=17.3 um g=1031 nm | 16 (nominal) | 12.2 | 2.81 | 2.71 | 1.00 | 150.0 | +34% |
+| Au/SU-8 t=0.60 um a=17.3 um g=1031 nm | 50 | 38.8 | 3.91 | 3.72 | 1.39 | 209.6 | +88% |
+| Au/SU-8 t=0.60 um a=17.3 um g=1031 nm | 100 | 77.6 | 5.08 | 4.83 | 1.81 | 272.7 | +144% |
+| Au/SU-8 t=0.60 um a=17.3 um g=1031 nm | 200 | 155.2 | 6.81 | 6.50 | 2.42 | 366.0 | +228% |
+| Au/SU-8 t=0.60 um a=17.3 um g=1031 nm | 500 | 388.0 | 10.32 | 9.95 | 3.67 | 555.5 | +398% |
+| Cr t=0.30 um a=13.6 um g=649 nm | -140 (0.9 sigma_cr) | -13.2 | 1.47 | - | 0.64 | 47.3 | -68% |
+| Cr t=0.30 um a=13.6 um g=649 nm | -100 | -9.5 | 2.75 | - | 1.20 | 88.8 | -40% |
+| Cr t=0.30 um a=13.6 um g=649 nm | -50 | -4.7 | 3.78 | - | 1.65 | 122.3 | -17% |
+| Cr t=0.30 um a=13.6 um g=649 nm | 0 | 0.0 | 4.57 | 4.57 | 2.00 | 148.1 | +0% |
+| Cr t=0.30 um a=13.6 um g=649 nm | 50 | 4.7 | 5.24 | 5.14 | 2.29 | 169.9 | +15% |
+| Cr t=0.30 um a=13.6 um g=649 nm | 100 | 9.5 | 5.82 | 5.65 | 2.55 | 189.0 | +28% |
+| Cr t=0.30 um a=13.6 um g=649 nm | 200 | 18.9 | 6.83 | 6.55 | 2.99 | 222.0 | +50% |
+| Cr t=0.30 um a=13.6 um g=649 nm | 500 | 47.3 | 9.16 | 8.70 | 4.01 | 298.8 | +102% |
+| Cr/SiN t=0.40 um a=11.3 um g=341 nm | -322 (0.9 sigma_cr) | -13.2 | 4.01 | - | 1.60 | 47.3 | -68% |
+| Cr/SiN t=0.40 um a=11.3 um g=341 nm | -100 | -4.1 | 10.66 | - | 4.26 | 126.0 | -15% |
+| Cr/SiN t=0.40 um a=11.3 um g=341 nm | -50 | -2.1 | 11.63 | - | 4.65 | 137.5 | -7% |
+| Cr/SiN t=0.40 um a=11.3 um g=341 nm | 0 | 0.0 | 12.52 | 12.52 | 5.00 | 148.1 | +0% |
+| Cr/SiN t=0.40 um a=11.3 um g=341 nm | 50 | 2.1 | 13.34 | 13.21 | 5.33 | 157.9 | +7% |
+| Cr/SiN t=0.40 um a=11.3 um g=341 nm | 100 | 4.1 | 14.11 | 13.87 | 5.64 | 167.2 | +13% |
+| Cr/SiN t=0.40 um a=11.3 um g=341 nm | 200 | 8.2 | 15.53 | 15.10 | 6.21 | 184.1 | +24% |
+| Cr/SiN t=0.40 um a=11.3 um g=341 nm | 500 | 20.5 | 19.12 | 18.30 | 7.64 | 227.1 | +53% |
+
+## Table 6. Few-layer graphene membranes (tension-dominated model)
+| layers | tension T N/m | a um | f_vac MHz | f_water MHz (Lamb, indicative) | V_PI vented V (g=100 nm) | sealed: w_atm,centre um (gap 0.1 um) | strain % |
+|---|---|---|---|---|---|---|---|
+| 1 | 0.01 | 2 | 22.29 | 0.523 | 0.68 | 10.1 | 0.003 |
+| 1 | 0.01 | 5 | 8.92 | 0.132 | 0.27 | 63.3 | 0.003 |
+| 1 | 0.01 | 10 | 4.46 | 0.047 | 0.14 | 253.3 | 0.003 |
+| 1 | 0.1 | 2 | 70.49 | 1.654 | 2.16 | 1.0 | 0.029 |
+| 1 | 0.1 | 5 | 28.20 | 0.419 | 0.86 | 6.3 | 0.029 |
+| 1 | 0.1 | 10 | 14.10 | 0.148 | 0.43 | 25.3 | 0.029 |
+| 1 | 1.0 | 2 | 222.92 | 5.231 | 6.84 | 0.1 | 0.294 |
+| 1 | 1.0 | 5 | 89.17 | 1.323 | 2.73 | 0.6 | 0.294 |
+| 1 | 1.0 | 10 | 44.58 | 0.468 | 1.37 | 2.5 | 0.294 |
+| 5 | 0.01 | 2 | 9.97 | 0.522 | 0.68 | 10.1 | 0.001 |
+| 5 | 0.01 | 5 | 3.99 | 0.132 | 0.27 | 63.3 | 0.001 |
+| 5 | 0.01 | 10 | 1.99 | 0.047 | 0.14 | 253.3 | 0.001 |
+| 5 | 0.1 | 2 | 31.52 | 1.652 | 2.16 | 1.0 | 0.006 |
+| 5 | 0.1 | 5 | 12.61 | 0.418 | 0.86 | 6.3 | 0.006 |
+| 5 | 0.1 | 10 | 6.30 | 0.148 | 0.43 | 25.3 | 0.006 |
+| 5 | 1.0 | 2 | 99.69 | 5.225 | 6.84 | 0.1 | 0.059 |
+| 5 | 1.0 | 5 | 39.88 | 1.323 | 2.73 | 0.6 | 0.059 |
+| 5 | 1.0 | 10 | 19.94 | 0.468 | 1.37 | 2.5 | 0.059 |
+
+## Table 7. Recommended starting designs (6-term Galerkin pull-in, Ritz frequency)
+| design | stack (gap side first) | a um | g_air nm | t_ins nm | f_vac/air MHz (Ritz) | f_water MHz (Lamb) | expected immersed centre MHz | V_PI vented V (Galerkin) | V_PI sealed V (Galerkin) | w_atm,centre nm | sigma_cr MPa | cells per lambda/2 elem (FF) | capillary ratio R | gap process | notes |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| R1 Lecture-4 analog, resist gap, ~0.5 MHz immersed | Al 1.00 um | 39.4 | 1000 | 516 | 1.64 | 0.50 | 0.50-0.75 | 102.0 | 43.4 | 575.8 | -63 | 289 (0.63) | 0.26 | spin-coated AZ3312 sacrificial (~1 um), anchors opened by MLA; solvent release, IPA dry | Pset-4 cantilever flow made circular; the same die resonates near 1.6 MHz in air for bench tests; vent for air, seal for water |
+| R2 SU-8 polyCMUT, ~1 MHz immersed | Au 0.05 um / SU-8 4.00 um | 43.3 | 500 | 419 | 2.46 | 1.00 | 1.00-1.50 | 83.4 | 63.6 | 119.5 | -73 | 64 (0.67) | 0.22 | 500 nm sputtered Cr (or Cu) sacrificial, wet-etched through lateral channels | Gerardo-2018-like but spin-coat + evaporation only; SU-8 tensile stress raises f (Table 5); seal channel mouths with spin-coated SU-8 |
+| R3 Al nanogap 100 nm, ~8 MHz immersed (wet-release safe) | Al 1.00 um | 12.3 | 100 | 221 | 16.86 | 8.38 | 8.38-12.57 | 43.5 | 41.5 | 5.5 | -645 | 4 (0.24) | 0.25 | 100 nm sputtered sacrificial metal (gap = sputtered thickness) | largest-radius 1 um Al cell that survives IPA drying (R<=0.25) and 1 atm sealing at g=100 nm |
+| R4 Al nanogap 75 nm, ~12 MHz immersed (wet-release safe) | Al 1.00 um | 10.7 | 75 | 204 | 22.28 | 11.66 | 11.66-17.49 | 40.2 | 38.8 | 3.1 | -852 | 4 (0.35) | 0.25 | 75 nm sputtered sacrificial metal | true sub-100 nm gap (C2); verify gap by SEM of a cleaved witness step and by V_PI |
+| R5 Cr/SiNx nanogap 100 nm, ~7.5 MHz immersed | Cr 0.05 um / SiNx 1.00 um | 15.5 | 100 | 220 | 15.80 | 7.54 | 7.54-11.31 | 43.3 | 41.3 | 5.5 | -970 | 4 (0.31) | 0.25 | 100 nm sputtered Al sacrificial removed in Al etchant; SiNx membrane over 50 nm Cr | needs low-stress/tensile SiNx: compressive films beyond sigma_cr buckle |
+| R6 gap-scaling test die (insulator-free pull-in cells) [g=200 nm] | Al 1.00 um | 10.0 | 200 | 0 | 25.51 | 13.68 | 13.68-20.52 | 129.2 | 127.5 | 2.4 | -976 | 1 (0.10) | 0.03 | same mask, sacrificial 50/100/200 nm on separate pieces | pull-in shorts the electrodes -> current step in the I-V sweep (use compliance); V_PI ~ g^1.5 extracts the gap |
+| R6 gap-scaling test die (insulator-free pull-in cells) [g=100 nm] | Al 1.00 um | 10.0 | 100 | 0 | 25.51 | 13.68 | 13.68-20.52 | 45.7 | 44.5 | 2.4 | -976 | 1 (0.10) | 0.11 | same mask, sacrificial 50/100/200 nm on separate pieces | pull-in shorts the electrodes -> current step in the I-V sweep (use compliance); V_PI ~ g^1.5 extracts the gap |
+| R6 gap-scaling test die (insulator-free pull-in cells) [g=50 nm] | Al 1.00 um | 10.0 | 50 | 0 | 25.51 | 13.68 | 13.68-20.52 | 16.1 | 15.3 | 2.4 | -976 | 1 (0.10) | 0.43 | same mask, sacrificial 50/100/200 nm on separate pieces | pull-in shorts the electrodes -> current step in the I-V sweep (use compliance); V_PI ~ g^1.5 extracts the gap |
+| R7 air-coupled bench device, ~2 MHz in air | Al 1.00 um | 35.0 | 1000 | 673 | 2.08 | - | air: 2.08 | 133.1 | 85.6 | 357.4 | -80 | 1 (0.57) | 0.16 | AZ3312 resist sacrificial (~1 um), vented (no seal) | same process and mask as R1 (smaller radius); resonance measurable in air without sealing |
+| R8 Parylene-C variant, ~1 MHz immersed | Al 0.10 um / Parylene C 5.00 um | 46.9 | 500 | 445 | 2.38 | 1.00 | 1.00-1.50 | 88.1 | 69.1 | 109.9 | -91 | 49 (0.60) | 0.20 | 500 nm sacrificial metal; Parylene CVD also seals release holes | REQUIRES-STAFF-APPROVAL (Parylene CVD) |

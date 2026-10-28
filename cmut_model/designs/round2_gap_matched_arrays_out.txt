@@ -1,0 +1,70 @@
+=== A. Gap-matched array copies at their target gap (1 um Al, 50 nm SiO2, rho_e 0.85) ===
+g nm | a um | cells/elem | FF | C0 elem pF | I@1V/s pA | R(23) | R(21.7) | Vbare | Vins | 0.7Vins | f_vac | f@0.7 | Lamb sealed | dC/C0@0.7 | dC pF | kT2 | E_ins MV/cm | margin 0.15a um
+  50 |  7.75 | 4x93=372 | 0.35 | 7.15 | 7.1 | 0.156 | 0.147 | 27.4 | 38.5 | 27.0 | 42.5 | 38.5 | 24.9 | 6.2% | 0.446 | 0.134 | 1.26 | 1.16
+  75 |  9.50 | 3x80=240 | 0.34 | 4.96 | 5.0 | 0.157 | 0.148 | 33.5 | 42.4 | 29.7 | 28.3 | 25.7 | 15.4 | 6.2% | 0.309 | 0.134 | 0.99 | 1.43
+ 100 | 11.00 | 3x71=213 | 0.40 | 4.59 | 4.6 | 0.158 | 0.149 | 38.4 | 46.0 | 32.2 | 21.1 | 19.1 | 10.9 | 6.2% | 0.286 | 0.134 | 0.84 | 1.65
+
+=== B. Cross matrix: every copy on every gap (R at 23 mN/m; bare V_PI; 0.7x insulated V_PI) ===
+50 nm | a=7.75: R=0.156 Vb=27.4 0.7Vi=27.0 [usable] | a=9.50: R=0.352 Vb=18.2 0.7Vi=18.0 [STUCK?] | a=11.00: R=0.633 Vb=13.6 0.7Vi=13.4 [STUCK?]
+75 nm | a=7.75: R=0.069 Vb=50.3 0.7Vi=44.6 [bias>40V] | a=9.50: R=0.157 Vb=33.5 0.7Vi=29.7 [usable] | a=11.00: R=0.281 Vb=25.0 0.7Vi=22.1 [STUCK?]
+100 nm | a=7.75: R=0.039 Vb=77.4 0.7Vi=64.9 [bias>40V] | a=9.50: R=0.088 Vb=51.5 0.7Vi=43.2 [bias>40V] | a=11.00: R=0.158 Vb=38.4 0.7Vi=32.2 [usable]
+lowest bare V_PI of any copy on each gap (cap for unselected-copy screening): {50: 13.6, 75: 25.0, 100: 38.4}
+
+=== C. C2 sensitivity: true fraction of insulated V_PI reached by a '0.7x' (and 0.6x) bias when the bare gap is larger by d ===
+50 nm, a=7.75: matched bare V_PI 27.4 V | +5nm: 0.7x->0.808 0.6x->0.692 (bare V_PI 31.6 V) | +10nm: 0.7x->0.920 0.6x->0.789 (bare V_PI 36.0 V) | +20nm: 0.7x->1.160 0.6x->0.994 (bare V_PI 45.3 V) | +50nm: 0.7x->1.980 0.6x->1.697 (bare V_PI 77.4 V)
+50 nm, a=9.50: matched bare V_PI 18.2 V | +5nm: 0.7x->0.808 0.6x->0.692 (bare V_PI 21.0 V) | +10nm: 0.7x->0.920 0.6x->0.789 (bare V_PI 23.9 V) | +20nm: 0.7x->1.160 0.6x->0.994 (bare V_PI 30.2 V) | +50nm: 0.7x->1.980 0.6x->1.697 (bare V_PI 51.5 V)
+75 nm, a=9.50: matched bare V_PI 33.5 V | +5nm: 0.7x->0.771 0.6x->0.661 (bare V_PI 36.9 V) | +10nm: 0.7x->0.845 0.6x->0.724 (bare V_PI 40.4 V) | +20nm: 0.7x->0.998 0.6x->0.855 (bare V_PI 47.7 V) | +50nm: 0.7x->1.506 0.6x->1.291 (bare V_PI 72.0 V)
+100 nm, a=9.50: matched bare V_PI 51.5 V | +5nm: 0.7x->0.753 0.6x->0.646 (bare V_PI 55.4 V) | +10nm: 0.7x->0.808 0.6x->0.692 (bare V_PI 59.4 V) | +20nm: 0.7x->0.920 0.6x->0.789 (bare V_PI 67.7 V) | +50nm: 0.7x->1.286 0.6x->1.102 (bare V_PI 94.6 V)
+100 nm, a=11.00: matched bare V_PI 38.4 V | +5nm: 0.7x->0.753 0.6x->0.646 (bare V_PI 41.3 V) | +10nm: 0.7x->0.808 0.6x->0.692 (bare V_PI 44.3 V) | +20nm: 0.7x->0.920 0.6x->0.789 (bare V_PI 50.5 V) | +50nm: 0.7x->1.286 0.6x->1.102 (bare V_PI 70.6 V)
+
+=== D. C2 L2-well geometry (anchor ring 6 um = web) ===
+a= 7.75 um, margin 10 um: isolated-twin opening radius 23.8 um (dia 48 um)
+a= 7.75 um, margin 30 um: isolated-twin opening radius 43.8 um (dia 88 um)
+a= 7.75 um, margin 50 um: isolated-twin opening radius 63.8 um (dia 128 um)
+a= 9.50 um, margin 10 um: isolated-twin opening radius 25.5 um (dia 51 um)
+a= 9.50 um, margin 30 um: isolated-twin opening radius 45.5 um (dia 91 um)
+a= 9.50 um, margin 50 um: isolated-twin opening radius 65.5 um (dia 131 um)
+a=11.00 um, margin 10 um: isolated-twin opening radius 27.0 um (dia 54 um)
+a=11.00 um, margin 30 um: isolated-twin opening radius 47.0 um (dia 94 um)
+a=11.00 um, margin 50 um: isolated-twin opening radius 67.0 um (dia 134 um)
+a= 6.00 um, margin 10 um: isolated-twin opening radius 22.0 um (dia 44 um)
+a= 6.00 um, margin 30 um: isolated-twin opening radius 42.0 um (dia 84 um)
+a= 6.00 um, margin 50 um: isolated-twin opening radius 62.0 um (dia 124 um)
+a=14.00 um, margin 10 um: isolated-twin opening radius 30.0 um (dia 60 um)
+a=14.00 um, margin 30 um: isolated-twin opening radius 50.0 um (dia 100 um)
+a=14.00 um, margin 50 um: isolated-twin opening radius 70.0 um (dia 140 um)
+a= 7.75: end-zone well 800 x 94 um (margin 30 um); plus 30 um guard to first insulated anchor; area/end 0.075 mm^2 -> 2 ends 0.150 mm^2
+a= 7.75: end-zone well 800 x 134 um (margin 50 um); plus 50 um guard to first insulated anchor; area/end 0.107 mm^2 -> 2 ends 0.214 mm^2
+a= 9.50: end-zone well 800 x 97 um (margin 30 um); plus 30 um guard to first insulated anchor; area/end 0.078 mm^2 -> 2 ends 0.155 mm^2
+a= 9.50: end-zone well 800 x 137 um (margin 50 um); plus 50 um guard to first insulated anchor; area/end 0.110 mm^2 -> 2 ends 0.219 mm^2
+a=11.00: end-zone well 800 x 100 um (margin 30 um); plus 30 um guard to first insulated anchor; area/end 0.080 mm^2 -> 2 ends 0.160 mm^2
+a=11.00: end-zone well 800 x 140 um (margin 50 um); plus 50 um guard to first insulated anchor; area/end 0.112 mm^2 -> 2 ends 0.224 mm^2
+
+=== E. Extra bare metal per bare twin under diluted resist (C2 trade) ===
+a= 7.75: electrode 136 um^2; extra bare bus ~32 um^2 at 1 um width (+23%)
+a= 7.75: electrode 136 um^2; extra bare bus ~64 um^2 at 2 um width (+47%)
+a= 9.50: electrode 205 um^2; extra bare bus ~32 um^2 at 1 um width (+16%)
+a= 9.50: electrode 205 um^2; extra bare bus ~64 um^2 at 2 um width (+31%)
+a=11.00: electrode 275 um^2; extra bare bus ~32 um^2 at 1 um width (+12%)
+a=11.00: electrode 275 um^2; extra bare bus ~64 um^2 at 2 um width (+23%)
+
+=== F. 7.75 um copy with fallback electrode min(0.85a, a-2um) = 5.75 um (if L3-L1 overlay > ~0.9 um) ===
+rho_e 0.85->0.742: Vins 38.5->39.3 V; Vbare 27.4->27.9 V; C0 x0.762
+
+=== G. Run-2 thicker SiO2: 0.7x insulated V_PI (V) per copy ===
+SiO2 72 nm: 50nm: 7.75->30.7, 9.50->20.4, 11.00->15.2 | 75nm: 7.75->49.0, 9.50->32.6, 11.00->24.3 | 100nm: 7.75->69.9, 9.50->46.5, 11.00->34.7
+SiO2 100 nm: 50nm: 7.75->35.6, 9.50->23.7, 11.00->17.7 | 75nm: 7.75->54.7, 9.50->36.4, 11.00->27.2 | 100nm: 7.75->76.3, 9.50->50.8, 11.00->37.9
+SiO2 139 nm: 50nm: 7.75->42.9, 9.50->28.6, 11.00->21.3 | 75nm: 7.75->63.0, 9.50->42.0, 11.00->31.3 | 100nm: 7.75->85.6, 9.50->57.0, 11.00->42.5
+
+=== H. Capillary floor for stiction-safe bare cells, R = 0.25: V_min = sqrt(0.888 gamma g/(R eps0)) ===
+50 nm: 21.5 V (gamma 23) / 20.9 V (21.7)
+75 nm: 26.3 V (gamma 23) / 25.6 V (21.7)
+100 nm: 30.4 V (gamma 23) / 29.5 V (21.7)
+
+=== I. Usable-array Monte Carlo (independent check; gap ~ N(target, sigma); R<=0.20 at 23 mN/m) ===
+sigma 10% strict: per-die P v1 0.00/0.87/0.30 -> v2 0.88/1.00/0.96 | E[usable arrays per 6-die run] 2.34 -> 5.67
+sigma 10% v1pol : per-die P v1 0.00/0.87/0.74 -> v2 0.88/1.00/1.00 | E[usable arrays per 6-die run] 3.22 -> 5.77
+sigma 10% bare  : per-die P v1 0.00/0.78/0.06 -> v2 0.88/0.89/0.54 | E[usable arrays per 6-die run] 1.67 -> 4.61
+sigma 15% strict: per-die P v1 0.01/0.74/0.34 -> v2 0.80/1.00/0.88 | E[usable arrays per 6-die run] 2.20 -> 5.35
+sigma 15% v1pol : per-die P v1 0.01/0.76/0.64 -> v2 0.78/1.00/0.98 | E[usable arrays per 6-die run] 2.82 -> 5.53
+sigma 15% bare  : per-die P v1 0.01/0.59/0.14 -> v2 0.77/0.86/0.48 | E[usable arrays per 6-die run] 1.47 -> 4.23
